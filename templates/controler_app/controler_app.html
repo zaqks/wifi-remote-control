@@ -11,6 +11,8 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+
+            user-select: none;
         }
 
 
@@ -126,7 +128,12 @@
 
             KB.appendChild(rw)
         }
-
+        //        
+        document.addEventListener("click", async function (_) {
+            if (!document.fullscreen) {
+                await document.documentElement.requestFullscreen()
+            }
+        })
     </script>
 
 </body>

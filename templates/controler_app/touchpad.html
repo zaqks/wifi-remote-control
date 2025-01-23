@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TouchPad</title>
+
+    <style>
+        * {
+            border: 0;
+            margin: 0;
+            box-sizing: border-box;
+
+
+            user-select: none;
+        }
+
+        body {
+            background-color: black;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <script>
+        const URL = "{% url 'controller_app:touch' %}";
+        const CSRF = "{{ csrf_token }}";
+
+        // Throttle settings
+        let lastMoveTime = 0;
+        const THROTTLE_DELAY = 100; // Time in milliseconds
+
+        async function move(x, y) {
+            await fetch(URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json", // Corrected content type
+                    "X-CSRFToken": CSRF,
+                },
+                body: JSON.stringify({x: x, y: y})
+            });
+        }
+
+        document.addEventListener("click", function (e) {
+            if (!document.fullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+        });
+
+        let initialX, initialY;
+
+        document.addEventListener("touchstart", function (event) {
+            const ev = event.touches[0];
+            initialX = ev.clientX;
+            initialY = ev.clientY;
+        });
+
+        document.addEventListener("touchmove", function (event) {
+            const ev = event.touches[0];
+
+            const deltaX = ev.clientX - initialX;
+            const deltaY = ev.clientY - initialY;
+
+            // Update initial positions
+            initialX = ev.clientX;
+            initialY = ev.clientY;
+
+            // Throttle the move function calls
+            const currentTime = Date.now();
+            if (currentTime - lastMoveTime >= THROTTLE_DELAY) {
+                lastMoveTime = currentTime;
+                move(deltaX, deltaY);
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>
