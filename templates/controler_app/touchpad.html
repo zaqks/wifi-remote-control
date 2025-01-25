@@ -4,6 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+
     <title>TouchPad</title>
 
     <style>
@@ -30,18 +37,15 @@
         const URL = "{% url 'controller_app:touch' %}";
         const CSRF = "{{ csrf_token }}";
 
-        // Throttle settings
-        let lastMoveTime = 0;
-        const THROTTLE_DELAY = 100; // Time in milliseconds
 
-        async function move(x, y) {
-            await fetch(URL, {
+        function move(x, y) {
+            fetch(URL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json", // Corrected content type
                     "X-CSRFToken": CSRF,
                 },
-                body: JSON.stringify({x: x, y: y})
+                body: JSON.stringify({x: x * 10, y: y * 10})
             });
         }
 
@@ -70,11 +74,9 @@
             initialY = ev.clientY;
 
             // Throttle the move function calls
-            const currentTime = Date.now();
-            if (currentTime - lastMoveTime >= THROTTLE_DELAY) {
-                lastMoveTime = currentTime;
-                move(deltaX, deltaY);
-            }
+
+            move(deltaX, deltaY);
+
         });
     </script>
 

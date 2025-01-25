@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+
+    <title>TouchPad</title>
+
+    <style>
+        * {
+            border: 0;
+            margin: 0;
+            box-sizing: border-box;
+
+
+            user-select: none;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+
+            background-color: black;
+
+
+            width: 100%;
+            height: 100vh;
+
+        }
+
+        button {
+            color: white;
+            font-weight: 800;
+
+            background-color: lightcoral;
+            padding: 10px;
+
+            min-width: 100px;
+            aspect-ratio: 1;
+
+            border-radius: 50%;
+
+        }
+
+        #sep {
+            width: 100px;
+        }
+
+
+        /*########################################*/
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        body {
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <button type="button" onclick="move(0)">UP</button>
+
+    <div class="row">
+        <button type="button" onclick="move(3)">RIGHT</button>
+        <div id="sep"></div>
+        <button type="button" onclick="move(1)">LEFT</button>
+    </div>
+
+    <button type="button" onclick="move(2)">DOWN</button>
+
+
+
+
+    <script>
+        const URL = "{% url 'controller_app:touch' %}";
+        const CSRF = "{{ csrf_token }}";
+
+
+        function move(indx) {
+            fetch(URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json", // Corrected content type
+                    "X-CSRFToken": CSRF,
+                },
+                body: JSON.stringify({indx: indx})
+            });
+        }
+
+        // document.addEventListener("click", function (e) {
+        //     if (!document.fullscreen) {
+        //         document.documentElement.requestFullscreen();
+        //     }
+        // });
+
+
+
+    </script>
+
+
+</body>
+
+</html>
