@@ -27,3 +27,6 @@ A web-based virtual keyboard and touchpad that lets you control your PC remotely
 ---
 
 
+## How to Run
+
+Simply run the `runserver.py` script and open your phone's browser on your local IP port 8000 (you can check your local IP by using `ip addr` on linux, the samething is possible on windows but with a different command)
