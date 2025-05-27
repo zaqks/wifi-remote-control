@@ -1,4 +1,4 @@
-<img width='100%' src='docs/Screenshot_20250527_060139.png'>
+<img width='100%' src='https://github.com/zaqks/wifi-remote-control/blob/fd21623f6e5a98742f59fdb03fba72c034a4797f/docs/Screenshot_20250527_060139.png'>
 
 # Virtual Keyboard & Touchpad Controller
 
