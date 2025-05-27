@@ -1,1 +1,1 @@
-# pc_remote_control
+# wifi-remote-control

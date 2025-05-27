@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wifi Virtual Controller</title>
+
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'controller_app/controller_app.css' %}">
+
+
+</head>
+
+<body>
+    <div id="kb">
+        <div class="kb_half" id="left"></div>
+        <div id="center">
+            <div id="touchpad"></div>
+            <div id="buttons">
+                <button id="l"></button>
+                <button id="r"></button>
+            </div>
+        </div>
+
+        <div class="kb_half" id="right"></div>
+    </div>
+
+
+    <script src="{% static 'controller_app/ws.js' %}"></script>
+    <script src="{% static 'controller_app/kb.js' %}"></script>
+    <script src="{% static 'controller_app/tp.js' %}"></script>
+
+    <script>
+        let KEYS = [];
+        fetch('{% static "controller_app/keys.json" %}')
+            .then(response => response.json())
+            .then(data => {
+                KEYS = data;
+                buildKeyboard();
+            })
+            .catch(error => console.error('Error loading keys:', error));
+
+
+        // Physical keyboard support for combos
+        // document.addEventListener("keydown", (e) => {
+        //     const key = e.key.toLowerCase();
+        //     sendKeyDown(key);
+        // });
+
+        // document.addEventListener("keyup", (e) => {
+        //     const key = e.key.toLowerCase();
+        //     sendKeyUp(key);
+        // });
+
+
+        document.addEventListener("click", async function (_) {
+            if (!document.fullscreen) {
+                await document.documentElement.requestFullscreen()
+            }
+        })
+    </script>
+
+
+
+</body>
+
+</html>

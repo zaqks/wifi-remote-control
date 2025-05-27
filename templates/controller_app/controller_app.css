@@ -1,0 +1,95 @@
+:root {
+    --bg: #101010;
+    --fg: #aaaaaa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+}
+
+#kb {
+    width: 100vw;
+    min-height: calc((100vw / 3) - 9vw);
+
+    display: flex;
+    flex-direction: row;
+}
+
+
+.kb_half {
+    width: 40%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+.kb_half .rw {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.kb_half#right .rw {
+    justify-content: end;
+}
+
+.kb_half .rw .ky {
+    height: 100%;
+    background-color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    color: var(--fg);
+    font-weight: 600;
+    font-size: 1.5vw;
+    cursor: pointer;
+    user-select: none;
+}
+
+#center {
+    width: 20%;
+    background-color: var(--bg);
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+#center #touchpad{    
+    width: 100%;
+    height: 100%;
+}
+
+
+#center #buttons{    
+    display: flex;
+    justify-content: space-between;
+    gap: 1px;
+}
+
+#center #buttons button{
+    width: 100%;
+    aspect-ratio: 4;
+
+    background-color: var(--fg);    
+    border: 2px solid black;
+}

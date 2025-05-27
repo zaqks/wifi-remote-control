@@ -1,6 +1,6 @@
 #!/bin/bash
 
-find . | grep "__pycache__$" | xargs rm -r
+# find . | grep "__pycache__$" | xargs rm -r
 
 git add .
 git commit -am $1
